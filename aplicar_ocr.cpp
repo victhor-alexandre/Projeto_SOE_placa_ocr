@@ -23,8 +23,8 @@ std::string encontrarPlacaMercosul(const std::string& str) {
 
 std::tuple<std::string, cv::Mat, cv::Mat> aplicarOCR(const std::vector<std::pair<cv::Mat, cv::Mat>>& possiveisPlacas) {
     tesseract::TessBaseAPI ocr;
-    ocr.Init("./tessdata_best", "por", tesseract::OEM_LSTM_ONLY);
-    ocr.SetPageSegMode(tesseract::PSM_SINGLE_BLOCK);
+    ocr.Init("./tessdata_1", "por", tesseract::OEM_TESSERACT_LSTM_COMBINED);
+    ocr.SetPageSegMode(tesseract::PSM_SINGLE_BLOCK); 
     ocr.SetVariable("tessedit_char_whitelist", 
 		"0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM");
     
@@ -41,15 +41,15 @@ std::tuple<std::string, cv::Mat, cv::Mat> aplicarOCR(const std::vector<std::pair
         ocr.SetSourceResolution(300);
         std::string outText = std::string(ocr.GetUTF8Text());
 
-        std::string placa = encontrarPlacaMercosul(outText);
+        std::string placa = encontrarPlaca(outText);
         if (placa != "") {
             return std::make_tuple(placa, placaRecortada, placaRecortadaProcessada);
         }
 
-        //placa = encontrarPlaca(outText);
-        //if (placa != "") {
-        //    return std::make_tuple(placa, placaRecortada, placaRecortadaProcessada);
-        //}
+        placa = encontrarPlacaMercosul(outText);
+        if (placa != "") {
+            return std::make_tuple(placa, placaRecortada, placaRecortadaProcessada);
+        }
     }
 
     return std::make_tuple("", cv::Mat(), cv::Mat());

@@ -21,8 +21,8 @@ void exibirResultado(const Mat& imagemOriginal, const Mat& imagemProcessada, con
     //imshow("Placa Recortada", placaRecortada);
     
     //cout << "Placa Recortada Processada - Tamanho: " << placaRecortadaProcessada.size() << ", Tipo: " << placaRecortadaProcessada.type() << endl;
-    imshow("Placa Recortada Processada", placaRecortadaProcessada);
-    waitKey(0);
+    //imshow("Placa Recortada Processada", placaRecortadaProcessada);
+    //waitKey(0);
 }
 
 void detectarPlaca(const string& imagemPath) {
@@ -32,8 +32,11 @@ void detectarPlaca(const string& imagemPath) {
         return;
     }
 
+    //Processa a imagem, reduzindo o ruído e destacando as bordas
+    //Mat imagemProcessada = processarImagem::processarImagem(imagemOriginal);
     Mat imagemProcessada = processarImagem::processarImagem(imagemOriginal);
 
+    //Processa os contornos da imagem, identificando possíveis placas
     vector<pair<Mat, Mat>> possiveisPlacas = processarContornos::processarContornos(imagemOriginal, imagemProcessada);
 
     if (possiveisPlacas.empty()) {

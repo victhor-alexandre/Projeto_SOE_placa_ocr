@@ -26,14 +26,14 @@ std::vector<std::pair<cv::Mat, cv::Mat>> processarContornos(cv::Mat& imagemOrigi
             continue;
         }
 
-        if (area < 10000 || area > 70000) {
-            continue;
-        }
+        //if (area < 1000 || area > 7000000) {
+        //    continue;
+        //}
         // Debugging: Print contour information
         //std::cout << "Contour area: " << area << ", Bounding rect: " << boundingRect << std::endl;
         
         // Se o polígono tiver quatro lados, consideramos que é um retângulo
-        if (aprox.size() >= 4 && aprox.size() < 10) {
+        if (aprox.size() >= 4 && aprox.size() < 20) {
             cv::drawContours(imagemOriginal, std::vector<std::vector<cv::Point>>{aprox}, -1, cv::Scalar(0, 255, 0), 2);
 
             // recortar a imagem da placa
