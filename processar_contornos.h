@@ -3,9 +3,20 @@
 
 #include <opencv2/opencv.hpp>
 #include <vector>
+#include <pthread.h>
+using namespace cv;
+using namespace std;
 
 namespace processarContornos {
-    std::vector<std::pair<cv::Mat, cv::Mat>> processarContornos(cv::Mat& imagemOriginal, const cv::Mat& imagemProcessada);
-}
+
+struct validarContornoArgs {
+    vector<Point> contorno;
+    Mat imagemOriginal;
+};
+
+vector<Mat> processarContornos(Mat& imagemOriginal, const Mat& imagemProcessada);
+void* validarContorno(void* args);
+
+} // namespace processarContornos
 
 #endif // PROCESSAR_CONTORNOS_H

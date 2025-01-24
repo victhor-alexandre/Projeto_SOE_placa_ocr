@@ -6,11 +6,15 @@
 #include <leptonica/allheaders.h>
 #include <string>
 #include <vector>
+#include <tuple>
+
+using namespace cv;
+using namespace std;
 
 namespace aplicarOCR {
     std::string encontrarPlaca(const std::string& str);
     std::string encontrarPlacaMercosul(const std::string& str);
-    std::tuple<std::string, cv::Mat, cv::Mat> aplicarOCR(const std::vector<std::pair<cv::Mat, cv::Mat>>& possiveisPlacas);
+    std::tuple<std::string, cv::Mat> aplicarOCR(const std::vector<cv::Mat>& possiveisPlacas);
 }
 
 #endif // APLICAR_OCR_H
