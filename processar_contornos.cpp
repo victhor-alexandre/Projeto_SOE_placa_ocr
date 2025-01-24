@@ -9,12 +9,15 @@ static pthread_mutex_t mutexLock;
 vector<Mat> processarContornos(Mat& imagemOriginal, const Mat& imagemProcessada) {
     vector<vector<Point>> contornos;
     vector<Mat> possiveisPlacas;
+    
     findContours(imagemProcessada, contornos, RETR_TREE, CHAIN_APPROX_SIMPLE);
     vector<pthread_t> thread_id;
     pthread_t thread_main;
     struct validarContornoArgs args;
+
     pthread_mutex_init(&mutexLock, NULL);
     pthread_create(&thread_main, NULL, &validarContorno, &args);
+
     for (const auto& contorno : contornos) {
         args.contorno = contorno;
         args.imagemOriginal = imagemOriginal;
