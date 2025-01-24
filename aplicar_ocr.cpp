@@ -1,5 +1,7 @@
 #include "aplicar_ocr.h"
 #include <regex>
+using namespace std;
+using namespace cv;
 
 namespace aplicarOCR {
 
@@ -23,11 +25,11 @@ std::string encontrarPlacaMercosul(const std::string& str) {
 
 std::tuple<std::string, cv::Mat, cv::Mat> aplicarOCR(const std::vector<std::pair<cv::Mat, cv::Mat>>& possiveisPlacas) {
     tesseract::TessBaseAPI ocr;
-    ocr.Init("./tessdata_1", "por", tesseract::OEM_TESSERACT_LSTM_COMBINED);
+    ocr.Init("./tessdata_best", "eng", tesseract::OEM_TESSERACT_LSTM_COMBINED);
     ocr.SetPageSegMode(tesseract::PSM_SINGLE_BLOCK); 
     ocr.SetVariable("tessedit_char_whitelist", 
-		"0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM");
-    
+		"0123456789QWERTYUIOPASDFGHJKLZXCVBNM");
+        //"0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM");
 
     for (const auto& tupla : possiveisPlacas) {
         const cv::Mat& placaRecortada = tupla.first;
@@ -40,7 +42,11 @@ std::tuple<std::string, cv::Mat, cv::Mat> aplicarOCR(const std::vector<std::pair
                     placaRecortadaProcessada.step);
         ocr.SetSourceResolution(300);
         std::string outText = std::string(ocr.GetUTF8Text());
-
+        //Debug
+        cout << "Texto: " << outText << endl;
+        imshow("Placa Recortada Processada", placaRecortadaProcessada);
+        waitKey(0); 
+        // Se encontra alguma placa válida (normal ou padrão mercosul), para a iteração entre as possíveis placas, e retorna a placa atual
         std::string placa = encontrarPlaca(outText);
         if (placa != "") {
             return std::make_tuple(placa, placaRecortada, placaRecortadaProcessada);
