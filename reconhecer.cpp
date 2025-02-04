@@ -1,4 +1,4 @@
-#include "main.h"
+#include "reconhecer.h"
 #include <filesystem>
 #include <tuple> // Include the tuple header
 
@@ -13,15 +13,15 @@ void exibirResultado(const Mat& imagemOriginal, const Mat& placaRecortadaProcess
     //imshow("Imagem Original", imagemOriginal);
     
     //cout << "Placa Recortada Processada - Tamanho: " << placaRecortadaProcessada.size() << ", Tipo: " << placaRecortadaProcessada.type() << endl;
-    imshow("Placa Recortada Processada", placaRecortadaProcessada);
-    waitKey(0);
+    //imshow("Placa Recortada Processada", placaRecortadaProcessada);
+    //waitKey(0);
 }
 
-void detectarPlaca(const string& imagemPath) {
+string detectarPlaca(const string& imagemPath) {
     Mat imagemOriginal = imread(imagemPath);
     if (imagemOriginal.empty()) {
         cerr << "Erro ao abrir a imagem!" << endl;
-        return;
+        return "";
     }
 
     //Processa a imagem, reduzindo o ruído e destacando as bordas
@@ -32,7 +32,7 @@ void detectarPlaca(const string& imagemPath) {
     vector<Mat> possiveisPlacas = processarContornos::processarContornos(imagemOriginal, imagemProcessada);
     //cout << "Placas após processar: " << possiveisPlacas.size() << endl;
     if (possiveisPlacas.empty()) {
-        return;
+        return "";
     }
 
     string placaDetectada;
@@ -42,16 +42,22 @@ void detectarPlaca(const string& imagemPath) {
     if (!placaDetectada.empty()) {
         exibirResultado(imagemOriginal, placaRecortadaProcessada, placaDetectada);
     }
+
+    return placaDetectada;
 }
 
-int main(int argc, char** argv) {
+vector<string> reconhecerPlaca() {
     string pastaImagens = "images";
-    for (const auto& entry : fs::directory_iterator(pastaImagens)) {
-        string imagemFile = entry.path().string();
+    vector<string> placas;
+    for (const auto& imageEntry : fs::directory_iterator(pastaImagens)) {
+        string imagemFile = imageEntry.path().string();
         if (imagemFile.find(".jpg") != string::npos || imagemFile.find(".jpeg") != string::npos || imagemFile.find(".png") != string::npos) {
-            detectarPlaca(imagemFile);
+            string placa = detectarPlaca(imagemFile);
+            if (!placa.empty()) {
+                placas.push_back(placa);
+            }
         }
     }
 
-    return 0;
+    return placas;
 }
