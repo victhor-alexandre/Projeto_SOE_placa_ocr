@@ -101,7 +101,7 @@ int main() {
             //     
 
             for (int i = 0; i < 4; i++) {
-                takePhoto();
+                takePhotos();
                 placas_detectadas = reconhecerPlaca();
                 placa = placas_detectadas[0];
                 if (!placa.empty()) {
