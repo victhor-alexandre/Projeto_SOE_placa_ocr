@@ -17,10 +17,10 @@
 #include <array>
 #include "reconhecer.h"
 
-#define TRIG 5                                              // GPIO para o Trigger do sensor ultrassônico
-#define ECHO 6                                              // GPIO para o Echo do sensor ultrassônico
-#define GATE 7                                              // GPIO para controle da cancela (conectado ao optoacoplador através de resistor)
-#define BUTTON 8                                            // GPIO para botão de abertura manual
+#define TRIG 18                                              // GPIO para o Trigger do sensor ultrassônico
+#define ECHO 24                                              // GPIO para o Echo do sensor ultrassônico
+#define GATE 22                                              // GPIO para controle da cancela (conectado ao optoacoplador através de resistor)
+#define BUTTON 28                                            // GPIO para botão de abertura manual
 
 using namespace std;
 using namespace reconhecer;
