@@ -35,6 +35,6 @@ void controlGate();
 double getDistancia();
 void buttonInterrupt();
 void add_to_log(const std::string& placa);
-bool verifica_placa_autorizada(const char* placa);
+bool verifica_placa_autorizada(string placa);
 
 #endif // MAIN_H

@@ -72,9 +72,9 @@ void add_to_log(const std::string& placa) {
 }
 
 
-bool verifica_placa_autorizada(const char* placa) {
+bool verifica_placa_autorizada(string placa) {
     char command[256];
-    snprintf(command, sizeof(command), "grep -Fxq '%s' placas_autorizadas.txt", placa);
+    snprintf(command, sizeof(command), "grep -Fxq '%s' placas_autorizadas.txt", placa.c_str());
     int result = system(command);
 
     if (result == 0) {
