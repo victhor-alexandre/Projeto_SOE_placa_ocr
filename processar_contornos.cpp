@@ -77,7 +77,12 @@ void* validarContorno(void* args) {
     //cout << "antes do recorte" << endl;
         // recortar a imagem da placa
         Mat imagemRecortada = imagemOriginal(boundingRect);
+        
+        // Ampliar a imagem caso ela seja muito pequena
+        if (area < 15000) {
+            cv::resize(imagemRecortada, imagemRecortada, cv::Size(imagemRecortada.cols * 1.75,imagemRecortada.rows * 1.75), 0, 0, 1);
 
+        }
         // Debugging: Print cropped image information
         //cout << "Cropped image size: " << imagemRecortada.size() << endl;
 
