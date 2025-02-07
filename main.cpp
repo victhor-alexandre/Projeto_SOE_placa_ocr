@@ -100,9 +100,9 @@ int main() {
 
             //     
 
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < 5; i++) {
                 takePhotos();
-                placas_detectadas = reconhecerPlaca();
+                placas_detectadas = reconhecer::reconhecerPlaca();
                 placa = placas_detectadas[0];
                 if (!placa.empty()) {
                     placas.push_back(placa);
