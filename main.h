@@ -7,26 +7,33 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <unordered_map>
 #include <filesystem>
 #include <tuple>
 #include <stdio.h>
 #include <time.h>
 #include <stdbool.h>
 #include <wiringPi.h>
-#include <array> // Ensure this header is included
+#include <array>
 #include "reconhecer.h"
 
+#define TRIG 5                                              // GPIO para o Trigger do sensor ultrassônico
+#define ECHO 6                                              // GPIO para o Echo do sensor ultrassônico
+#define GATE 7                                              // GPIO para controle da cancela (conectado ao optoacoplador através de resistor)
+#define BUTTON 8                                            // GPIO para botão de abertura manual
+
+using namespace std;
+using namespace reconhecer;
 using namespace cv;
 using namespace std;
 
 // Function declarations
-double read_distance();
-void take_picture(int index);
-bool file_exists(const char *filename);
-void log_detected_plate(const std::string& placa);
-bool is_placa_autorizada(const char* placa);
+void takePhoto();
+int verifyAccess();
+void controlGate();
+double getDistancia();
+void buttonInterrupt();
 void add_to_log(const std::string& placa);
-void abrir_portao();
-vector<string> reconhecerPlaca();
+bool verifica_placa_autorizada(const char* placa);
 
 #endif // MAIN_H

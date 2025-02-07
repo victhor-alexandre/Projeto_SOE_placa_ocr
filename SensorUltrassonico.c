@@ -30,6 +30,11 @@ void setup() {
     digitalWrite(GATE, HIGH);                               // Inicializa o portão fechado (HIGH para não acionar o transistor)
 }
 
+void takePhotos() {
+    const char* command = "fswebcam -r 1920x1080 -v -S 5 --no-banner --set brightness=50% --png-1 image.png";
+    system(command);
+}
+
 // Função responsável para obter a distância medida pelo HC-SR04
 double getDistancia() {
     digitalWrite(TRIG, LOW);                                // Desabilita o TRIGGER (garantir que esteja pronto para gerar o pulso)
