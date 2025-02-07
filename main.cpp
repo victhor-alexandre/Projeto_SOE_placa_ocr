@@ -74,7 +74,7 @@ void add_to_log(const std::string& placa) {
 
 bool verifica_placa_autorizada(string placa) {
     char command[256];
-    snprintf(command, sizeof(command), "grep -Fxq '%s' placas_autorizadas.txt", placa.c_str());
+    snprintf(command, sizeof(command), "grep -Fxq '%s' placas_autorizadas.txt", placa);
     int result = system(command);
 
     if (result == 0) {
@@ -100,9 +100,9 @@ int main() {
 
             //     
 
-            for (int i = 0; i < 5; i++) {
-                takePhotos();
-                placas_detectadas = reconhecer::reconhecerPlaca();
+            for (int i = 0; i < 4; i++) {
+                takePhoto();
+                placas_detectadas = reconhecerPlaca();
                 placa = placas_detectadas[0];
                 if (!placa.empty()) {
                     placas.push_back(placa);

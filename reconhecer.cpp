@@ -46,7 +46,7 @@ string detectarPlaca(const string& imagemPath) {
     return placaDetectada;
 }
 
-vector<string> reconhecerPlaca() {
+std::vector<std::string> reconhecerPlaca() {
     string pastaImagens = "images";
     vector<string> placas;
     for (const auto& imageEntry : fs::directory_iterator(pastaImagens)) {
