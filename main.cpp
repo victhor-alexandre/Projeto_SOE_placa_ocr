@@ -88,8 +88,8 @@ bool verifica_placa_autorizada(string placa) {
 int main() {
     setup();
     string placa;
-    vector<string> placas;
-    vector<string> placas_detectadas;
+    std::vector<std::string> placas;
+    std::vector<std::string> placas_detectadas;
     unordered_map<string, int> placa_count;
     while (1) {
         cout << "\n--- Verificando distância ---\n";
