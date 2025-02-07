@@ -36,5 +36,5 @@ double getDistancia();
 void buttonInterrupt();
 void add_to_log(const std::string& placa);
 bool verifica_placa_autorizada(string placa);
-
+vector<string> reconhecerPlaca();
 #endif // MAIN_H
