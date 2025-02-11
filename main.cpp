@@ -12,7 +12,7 @@ void setup() {
     pinMode(BUTTON, INPUT);                                 // Configura GPIO do botão como entrada
     pullUpDnControl(BUTTON, PUD_UP);                        // Habilita o resistor de pull-up no botão
     wiringPiISR(BUTTON, INT_EDGE_FALLING, &buttonInterrupt);// Configura a interrupção do botão
-    digitalWrite(GATE, HIGH);                               // Inicializa o portão fechado (HIGH para não acionar o transistor)
+    digitalWrite(GATE, LOW);                               // Inicializa o portão fechado (HIGH para não acionar o transistor)
 }
 
 void takePhotos() {
