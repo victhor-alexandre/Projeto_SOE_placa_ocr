@@ -132,6 +132,7 @@ int main() {
                 cout << "Placa: " << placa << " autorizada. Abrindo a cancela..." << endl;
                 controlGate();                                             // Abre a cancela
                 add_to_log(placa);
+                autorizada = false;
                 while (getDistancia() < 60.0) {                             // Espera o carro sair 
                     usleep(2000000);
                 }
