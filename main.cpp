@@ -99,6 +99,8 @@ int main() {
     string placa;
     std::vector<std::string> placas;
     unordered_map<string, int> placa_count;
+    bool autorizada = false;
+
     while (1) {
         cout << "\n--- Verificando distância ---\n";
         double distancia = getDistancia();
@@ -108,25 +110,25 @@ int main() {
 
             //     
 
-            for (int i = 0; i < 5; i++) {
+            // for (int i = 0; i < 5; i++) {
                 takePhotos();
                 placa = reconhecer::reconhecerPlaca();
                 if (!placa.empty()) {
                     placas.push_back(placa);
                     placa_count[placa]++;
-
+                    autorizada = verifica_placa_autorizada(placa);
                     // if (placa_count[placa] > 3) {
                     //     break;
                     // }
                 }
-            }
+            // }
             // if (placa_count[placa] < 3) {
             //     cout << "Placa não detectada. Continuando a monitorar..." << endl;
             //     continue;
             // }
             
 
-            if (verifica_placa_autorizada(placa)) {                                           // Verica se esta liberado
+            if (autorizada) {                                           // Verica se esta liberado
                 controlGate();                                             // Abre a cancela
                 add_to_log(placa);
                 while (getDistancia() < 60.0) {                             // Espera o carro sair 
