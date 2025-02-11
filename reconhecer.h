@@ -17,8 +17,8 @@ using namespace cv;
 using namespace std;
 
 namespace reconhecer {
-    string detectarPlaca(const string& imagemPath);
-    std::vector<std::string> reconhecerPlaca();
+    std::string detectarPlaca(const std::string& imagemPath);
+    std::string reconhecerPlaca();
     void exibirResultado(const cv::Mat& imagemOriginal, const cv::Mat& placaRecortadaProcessada, const std::string& placaDetectada);
 }
 

@@ -89,7 +89,6 @@ int main() {
     setup();
     string placa;
     std::vector<std::string> placas;
-    std::vector<std::string> placas_detectadas;
     unordered_map<string, int> placa_count;
     while (1) {
         cout << "\n--- Verificando distância ---\n";
@@ -100,10 +99,9 @@ int main() {
 
             //     
 
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < 5; i++) {
                 takePhotos();
-                placas_detectadas = reconhecerPlaca();
-                placa = placas_detectadas[0];
+                placa = reconhecer::reconhecerPlaca();
                 if (!placa.empty()) {
                     placas.push_back(placa);
                     placa_count[placa]++;
