@@ -72,16 +72,21 @@ void add_to_log(const std::string& placa) {
 }
 
 
-bool verifica_placa_autorizada(string placa) {
-    char command[256];
-    snprintf(command, sizeof(command), "grep -Fxq '%s' placas_autorizadas.txt", placa);
-    int result = system(command);
-
-    if (result == 0) {
-        return true; // Placa found
-    } else {
-        return false; // Placa not found
+bool verifica_placa_autorizada(const std::string& placa) {
+    std::ifstream file("placas_autorizadas.txt");
+    if (!file.is_open()) {
+        std::cerr << "Failed to open file: placas_autorizadas.txt" << std::endl;
+        return false;
     }
+
+    std::string line;
+    while (std::getline(file, line)) {
+        if (line == placa) {
+            return true; // Placa found
+        }
+    }
+
+    return false; // Placa not found
 }
 
 // Função principal do programa
