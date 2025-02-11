@@ -30,3 +30,7 @@ $(TARGET): $(OBJS)
 # Clean up build files
 clean:
 	rm -f $(TARGET) $(OBJS)
+
+# Clear the log file
+clear_log:
+	> log.txt
