@@ -20,8 +20,8 @@
 
 #define TRIG 18                                              // GPIO para o Trigger do sensor ultrassônico
 #define ECHO 24                                              // GPIO para o Echo do sensor ultrassônico
-#define GATE 22                                              // GPIO para controle da cancela (conectado ao optoacoplador através de resistor)
-#define BUTTON 28                                            // GPIO para botão de abertura manual
+#define GATE 16                                              // GPIO para controle da cancela (conectado ao optoacoplador através de resistor)
+#define BUTTON 21                                            // GPIO para botão de abertura manual
 
 using namespace std;
 using namespace reconhecer;
