@@ -129,6 +129,7 @@ int main() {
             
 
             if (autorizada) {                                           // Verica se esta liberado
+                cout << "Placa: " << placa << " autorizada. Abrindo a cancela..." << endl;
                 controlGate();                                             // Abre a cancela
                 add_to_log(placa);
                 while (getDistancia() < 60.0) {                             // Espera o carro sair 
