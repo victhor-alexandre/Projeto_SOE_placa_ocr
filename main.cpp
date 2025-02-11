@@ -5,7 +5,7 @@ volatile int gateState = 0;
 
 // Configura os GPIOs
 void setup() {
-    wiringPiSetup();                                        // Inicializa a WiringPi
+    wiringPiSetupGpio();                                        // Inicializa a WiringPi
     pinMode(TRIG, OUTPUT);                                  // Configura Trigger como saída
     pinMode(ECHO, INPUT);                                   // Configura Echo como entrada
     pinMode(GATE, OUTPUT);                                  // Configura GPIO do portão como saída
