@@ -14,6 +14,8 @@
 #include <time.h>
 #include <stdbool.h>
 #include <unistd.h>
+#include <cstdio>
+#include <cstring>
 #include <wiringPi.h>
 #include <array>
 #include "reconhecer.h"

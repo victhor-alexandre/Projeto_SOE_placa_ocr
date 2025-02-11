@@ -73,19 +73,23 @@ void add_to_log(const std::string& placa) {
 
 
 bool verifica_placa_autorizada(const std::string& placa) {
-    std::ifstream file("placas_autorizadas.txt");
-    if (!file.is_open()) {
+    FILE* file = fopen("placas_autorizadas.txt", "r");
+    if (file == NULL) {
         std::cerr << "Failed to open file: placas_autorizadas.txt" << std::endl;
         return false;
     }
 
-    std::string line;
-    while (std::getline(file, line)) {
-        if (line == placa) {
+    char line[256];
+    while (fgets(line, sizeof(line), file)) {
+        // Remove newline character if present
+        line[strcspn(line, "\n")] = 0;
+        if (placa == line) {
+            fclose(file);
             return true; // Placa found
         }
     }
 
+    fclose(file);
     return false; // Placa not found
 }
 
