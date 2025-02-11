@@ -106,15 +106,15 @@ int main() {
                     placas.push_back(placa);
                     placa_count[placa]++;
 
-                    if (placa_count[placa] > 3) {
-                        break;
-                    }
+                    // if (placa_count[placa] > 3) {
+                    //     break;
+                    // }
                 }
             }
-            if (placa_count[placa] < 3) {
-                cout << "Placa não detectada. Continuando a monitorar..." << endl;
-                continue;
-            }
+            // if (placa_count[placa] < 3) {
+            //     cout << "Placa não detectada. Continuando a monitorar..." << endl;
+            //     continue;
+            // }
             
 
             if (verifica_placa_autorizada(placa)) {                                           // Verica se esta liberado
