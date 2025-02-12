@@ -119,6 +119,7 @@ int main() {
                 takePhotos();
                 try {
                     placa = reconhecer::reconhecerPlaca();
+                    cout << "Placa detectada: " << placa << endl;
                 } catch (const std::exception& e) {
                     std::cerr << "Error recognizing plate: " << e.what() << std::endl;
                     placa = ""; // Assign an empty string in case of an error
@@ -127,15 +128,15 @@ int main() {
                     placas.push_back(placa);
                     placa_count[placa]++;
                     autorizada = verifica_placa_autorizada(placa);
-                    if (placa_count[placa] > 3) {
+                    if (autorizada) {
                         break;
                     }
                 }
             }
-            if (placa_count[placa] < 3) {
-                cout << "Placa não detectada. Continuando a monitorar..." << endl;
-                continue;
-            }
+            // if (placa_count[placa] < 3) {
+            //     cout << "Placa não detectada. Continuando a monitorar..." << endl;
+            //     continue;
+            // }
             
 
             if (autorizada) {                                           // Verica se esta liberado
