@@ -42,7 +42,7 @@ double getDistancia() {
 
 void controlGate(){
     digitalWrite(GATE, HIGH);                               // Aciona o portão (HIGH para acionar o optoacoplador)
-    delay(500);                                            // Aguarda 1 segundo
+    delay(1000);                                            // Aguarda 1 segundo
     digitalWrite(GATE, LOW);                                // Desliga o portão (LOW para desligar o optoacoplador)
 }
 
