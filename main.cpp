@@ -111,7 +111,7 @@ int main() {
         double distancia = getDistancia();
         cout << "Distância medida = " << distancia << " cm" << endl;
 
-        if (distancia < 50.0) {
+        if (distancia < 100.0) {
 
             //     
 
