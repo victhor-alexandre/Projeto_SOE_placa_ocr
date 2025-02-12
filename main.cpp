@@ -69,7 +69,7 @@ void add_to_log(const std::string& placa, bool autorizada) {
 
     // Write the log entry
     if (!autorizada) {
-        fprintf(log_file, "[%s] Entrada manual autorizada" , time_str);
+        fprintf(log_file, "[%s] Entrada manual autorizada\n" , time_str);
     } else{
         fprintf(log_file, "[%s] Entrada autorizada: Placa nº %s\n", time_str, placa.c_str());
     }
