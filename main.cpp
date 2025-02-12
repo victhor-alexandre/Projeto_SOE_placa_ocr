@@ -42,18 +42,19 @@ double getDistancia() {
 
 void controlGate(){
     digitalWrite(GATE, HIGH);                               // Aciona o portão (HIGH para acionar o optoacoplador)
-    delay(1000);                                            // Aguarda 1 segundo
+    delay(500);                                            // Aguarda 1 segundo
     digitalWrite(GATE, LOW);                                // Desliga o portão (LOW para desligar o optoacoplador)
 }
 
 // Função que trata a interrupção do botão
 void buttonInterrupt() {
     controlGate();                                 // Envia o novo estado para a função de acionamento do portão
-   cout << "Liberação manual do portão" << endl;
+    add_to_log("", false);                        // Adiciona a entrada manual ao log
+    cout << "Liberação manual do portão" << endl;
 }
 
 // Function to log the detected plate with date and time
-void add_to_log(const std::string& placa) {
+void add_to_log(const std::string& placa, bool autorizada) {
     FILE *log_file = fopen("log.txt", "a");
     if (log_file == NULL) {
         perror("Failed to open log file");
@@ -67,7 +68,11 @@ void add_to_log(const std::string& placa) {
     strftime(time_str, sizeof(time_str) - 1, "%d-%m-%Y %H:%M:%S", t);
 
     // Write the log entry
-    fprintf(log_file, "[%s] Entrada autorizada: Placa nº %s\n", time_str, placa.c_str());
+    if (!autorizada) {
+        fprintf(log_file, "[%s] Entrada manual autorizada" , time_str);
+    } else{
+        fprintf(log_file, "[%s] Entrada autorizada: Placa nº %s\n", time_str, placa.c_str());
+    }
     fclose(log_file);
 }
 
@@ -110,28 +115,33 @@ int main() {
 
             //     
 
-            // for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 5; i++) {
                 takePhotos();
-                placa = reconhecer::reconhecerPlaca();
+                try {
+                    placa = reconhecer::reconhecerPlaca();
+                } catch (const std::exception& e) {
+                    std::cerr << "Error recognizing plate: " << e.what() << std::endl;
+                    placa = ""; // Assign an empty string in case of an error
+                }
                 if (!placa.empty()) {
                     placas.push_back(placa);
                     placa_count[placa]++;
                     autorizada = verifica_placa_autorizada(placa);
-                    // if (placa_count[placa] > 3) {
-                    //     break;
-                    // }
+                    if (placa_count[placa] > 3) {
+                        break;
+                    }
                 }
-            // }
-            // if (placa_count[placa] < 3) {
-            //     cout << "Placa não detectada. Continuando a monitorar..." << endl;
-            //     continue;
-            // }
+            }
+            if (placa_count[placa] < 3) {
+                cout << "Placa não detectada. Continuando a monitorar..." << endl;
+                continue;
+            }
             
 
             if (autorizada) {                                           // Verica se esta liberado
                 cout << "Placa: " << placa << " autorizada. Abrindo a cancela..." << endl;
                 controlGate();                                             // Abre a cancela
-                add_to_log(placa);
+                add_to_log(placa, autorizada);
                 autorizada = false;
                 while (getDistancia() < 60.0) {                             // Espera o carro sair 
                     usleep(2000000);
