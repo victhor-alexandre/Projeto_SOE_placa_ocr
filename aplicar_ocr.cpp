@@ -40,7 +40,7 @@ tuple<string, cv::Mat> aplicarOCR(const vector<Mat>& possiveisPlacas) {
         ocr.SetSourceResolution(300);
         string outText = string(ocr.GetUTF8Text());
         //Debug
-        //cout << "Texto: " << outText << endl;
+        cout << "Texto: " << outText << endl;
         //imshow("Placa Recortada Processada", placaRecortadaProcessada);
         //waitKey(0); 
         // Se encontra alguma placa válida (normal ou padrão mercosul), para a iteração entre as possíveis placas, e retorna a placa atual
