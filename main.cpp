@@ -133,10 +133,10 @@ int main() {
                     }
                 }
             }
-            // if (placa_count[placa] < 3) {
-            //     cout << "Placa não detectada. Continuando a monitorar..." << endl;
-            //     continue;
-            // }
+            if (placa_count[placa] < 3) {
+                cout << "Placa não detectada. Continuando a monitorar..." << endl;
+                continue;
+            }
             
 
             if (autorizada) {                                           // Verica se esta liberado
