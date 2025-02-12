@@ -152,7 +152,7 @@ int main() {
                 cout << "Acesso negado. Continuando a monitorar..." << endl;      // Caso contrario, a cancela permance fechada
             }
         } else {
-            cout << "Distância maior que 50 cm. Continuando a monitorar..." << endl;
+            cout << "Distância maior que 100 cm. Continuando a monitorar..." << endl;
         }
         usleep(500000);                                                     // Aguarda 500ms para nova medição
     }
