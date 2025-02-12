@@ -16,7 +16,7 @@ void setup() {
 }
 
 void takePhotos() {
-    const char* command = "fswebcam -r 1920x1080 -v -S 5 --no-banner --set brightness=15% --png 0 images/image.png";
+    const char* command = "fswebcam -r 1920x1080 -v -S 5 --no-banner --set brightness=20% --png 0 images/image.png";
     system(command);
 }
 
