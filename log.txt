@@ -1,10 +1,3 @@
-[14-02-2025 14:31:28] Entrada manual autorizada
+[12-02-2025 12:40:49] Entrada autorizada: Placa nº JGG9927
 [14-02-2025 14:31:56] Entrada manual autorizada
 [14-02-2025 14:32:02] Entrada manual autorizada
-[14-02-2025 14:32:21] Entrada manual autorizada
-[14-02-2025 14:32:41] Entrada manual autorizada
-[14-02-2025 14:32:52] Entrada manual autorizada
-[14-02-2025 14:35:05] Entrada manual autorizada
-[14-02-2025 14:35:06] Entrada manual autorizada
-[14-02-2025 14:49:45] Entrada manual autorizada
-[14-02-2025 15:09:00] Entrada manual autorizada
