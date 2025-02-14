@@ -75,10 +75,10 @@ void* validarContorno(void* args) {
         Mat imagemRecortadaProcessada = imagemOriginal(boundingRect);
         
         // Ampliar a imagem caso ela seja muito pequena
-        if (area < 15000) {
-            cv::resize(imagemRecortadaProcessada, imagemRecortadaProcessada, cv::Size(imagemRecortadaProcessada.cols * 1.75,imagemRecortadaProcessada.rows * 1.75), 0, 0, 1);
+        // if (area < 15000) {
+        //     cv::resize(imagemRecortadaProcessada, imagemRecortadaProcessada, cv::Size(imagemRecortadaProcessada.cols * 1.75,imagemRecortadaProcessada.rows * 1.75), 0, 0, 1);
 
-        }
+        // }
         // Debugging: Print cropped image information
         //cout << "Cropped image size: " << imagemRecortada.size() << endl;
 
