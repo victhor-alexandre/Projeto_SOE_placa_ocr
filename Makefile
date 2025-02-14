@@ -2,10 +2,10 @@
 CXX = g++
 
 # Compiler flags
-CXXFLAGS = `pkg-config --cflags opencv4 tesseract` -I/usr/local/include -I/usr/include
+CXXFLAGS = `pkg-config --cflags opencv4 tesseract` -I/usr/local/include -I/usr/include -pg
 
 # Linker flags
-LDFLAGS = `pkg-config --libs opencv4 tesseract` -lwiringPi -lpthread -llept -ltesseract
+LDFLAGS = `pkg-config --libs opencv4 tesseract` -lwiringPi -lpthread -llept -ltesseract -pg
 
 # Source files
 SRCS = main.cpp reconhecer.cpp aplicar_ocr.cpp processar_contornos.cpp processar_imagem.cpp
@@ -29,7 +29,7 @@ $(TARGET): $(OBJS)
 
 # Clean up build files
 clean:
-	rm -f $(TARGET) $(OBJS)
+	rm -f $(TARGET) $(OBJS) gmon.out
 
 # Clear the log
 clear_log:
