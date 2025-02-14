@@ -18,7 +18,7 @@ sudo apt-get install tesseract-ocr libtesseract-dev
 sudo apt-get install wiringpi
 ```
 
-### Compilar e executar
+## Compilar e executar
 
 Na primeira vez que instalar esse programa, é necessário abrir o terminal na raspberry pi e clonar esse repositório:
 
