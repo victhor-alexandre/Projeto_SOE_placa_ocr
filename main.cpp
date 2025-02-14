@@ -119,6 +119,11 @@ int main() {
                     break;
                 }
                 tirarFoto();
+                Mat imagem = imread("images/image.png");
+                if (imagem.empty()) {
+                    cerr << "Erro ao carregar a imagem!" << endl;
+                continue;
+            }
                 try {
                     placa = reconhecer::reconhecerPlaca();
                 } catch (const std::exception& e) {
