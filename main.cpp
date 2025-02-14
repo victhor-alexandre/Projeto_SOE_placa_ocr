@@ -16,7 +16,7 @@ wiringPiSetupGpio();                                        // Inicializa a Wiri
 }
 
 void tirarFoto() {
-    const char* command = "fswebcam -r 1920x1080 -v --no-banner --set brightness=30% --png 0 images/image1.png";
+    const char* command = "fswebcam -r 1920x1080 -v --no-banner --set brightness=30% --png 0 images/image.png";
     system(command);
 }
 
