@@ -31,6 +31,6 @@ $(TARGET): $(OBJS)
 clean:
 	rm -f $(TARGET) $(OBJS)
 
-# Clear the log file
+# Clear the log
 clear_log:
 	> log.txt

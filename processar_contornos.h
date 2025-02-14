@@ -14,6 +14,7 @@ struct validarContornoArgs {
     Mat imagemOriginal;
 };
 
+
 vector<Mat> processarContornos(Mat& imagemOriginal, const Mat& imagemProcessada);
 void* validarContorno(void* args);
 

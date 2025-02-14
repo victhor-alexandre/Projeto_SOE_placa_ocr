@@ -11,6 +11,7 @@
 using namespace cv;
 using namespace std;
 
+
 namespace aplicarOCR {
     std::string encontrarPlaca(const std::string& str);
     std::string encontrarPlacaMercosul(const std::string& str);

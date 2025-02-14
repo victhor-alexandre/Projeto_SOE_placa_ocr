@@ -20,23 +20,22 @@
 #include <array>
 #include "reconhecer.h"
 
-#define TRIG 18                                              // GPIO para o Trigger do sensor ultrassônico
-#define ECHO 24                                              // GPIO para o Echo do sensor ultrassônico
-#define GATE 16                                              // GPIO para controle da cancela (conectado ao optoacoplador através de resistor)
-#define BUTTON 21                                            // GPIO para botão de abertura manual
+#define TRIG 18         // GPIO para o Trigger do sensor ultrassônico
+#define ECHO 24         // GPIO para o Echo do sensor ultrassônico
+#define GATE 16         // GPIO para controle da cancela (conectado ao optoacoplador através de resistor)
+#define BUTTON 21       // GPIO para botão de abertura manual
 
-using namespace std;
+
 using namespace reconhecer;
 using namespace cv;
 using namespace std;
 
-// Function declarations
-void takePhoto();
-int verifyAccess();
-void controlGate();
-double getDistancia();
+
+void tirarFoto();
+void controlarPortao();
+double calculaDistancia();
 void buttonInterrupt();
-void add_to_log(const std::string& placa, bool autorizada);
-bool verifica_placa_autorizada(const std::string& placa);
+void adicionarLog(const std::string& placa, bool autorizada);
+bool verificaPlaca(const std::string& placa);
 
 #endif // MAIN_H

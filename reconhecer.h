@@ -16,6 +16,7 @@
 using namespace cv;
 using namespace std;
 
+
 namespace reconhecer {
     std::string detectarPlaca(const std::string& imagemPath);
     std::string reconhecerPlaca();

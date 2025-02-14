@@ -7,26 +7,19 @@ namespace processarImagem {
 
 Mat processarImagem(const Mat& imagemPlaca) {
     // Converter a imagem para tons de cinza
-    Mat imagemCinza;
-    cvtColor(imagemPlaca, imagemCinza, COLOR_BGR2GRAY);
-    //cout << "Imagem convertida para tons de cinza. Tamanho: " << imagemCinza.size() << endl;
+    cvtColor(imagemPlaca, imagemPlaca, COLOR_BGR2GRAY);
 
     // Aplicar filtros para remover ruídos
-    Mat imagemFiltrada;
-    bilateralFilter(imagemCinza, imagemFiltrada, 11, 17, 17);
-    //cout << "Filtro bilateral aplicado. Tamanho: " << imagemFiltrada.size() << endl;
-    GaussianBlur(imagemCinza, imagemFiltrada, Size(5, 5), 0);
+    bilateralFilter(imagemPlaca, imagemPlaca, 11, 17, 17);
+
+    GaussianBlur(imagemPlaca, imagemPlaca, Size(5, 5), 0);
 
     // Aplicar limiarização adaptativa para tornar os caracteres mais destacados
-    Mat imagemLinearizada;
-    Canny(imagemFiltrada, imagemLinearizada, 30, 300, 3, false);
-    //std::cout << "Canny aplicado. Tamanho: " << imagemLinearizada.size() << std::endl;
+    Canny(imagemPlaca, imagemPlaca, 30, 300, 3, false);
 
-    Mat imagemLimiarizada;
-    adaptiveThreshold(imagemLinearizada, imagemLimiarizada, 255, ADAPTIVE_THRESH_GAUSSIAN_C, THRESH_BINARY, 11, 4);
-    //cout << "Limiarização adaptativa aplicada. Tamanho: " << imagemLimiarizada.size() << endl;
+    adaptiveThreshold(imagemPlaca, imagemPlaca, 255, ADAPTIVE_THRESH_GAUSSIAN_C, THRESH_BINARY, 11, 4);
 
-    return imagemLimiarizada;
+    return imagemPlaca;
 }
 
 } // namespace processarImagem

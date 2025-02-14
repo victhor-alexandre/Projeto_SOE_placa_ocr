@@ -27,7 +27,7 @@ tuple<string, cv::Mat> aplicarOCR(const vector<Mat>& possiveisPlacas) {
     ocr.Init("./tessdata_best", "eng", tesseract::OEM_TESSERACT_LSTM_COMBINED);
     ocr.SetPageSegMode(tesseract::PSM_SINGLE_BLOCK); 
     ocr.SetVariable("tessedit_char_whitelist", 
-		"0123456789QWERTYUIOPASDFGHJKLZXCVBNM");
+		"0123456789QWERTYUIOPASDFGHJKLZXCVBNM");        //placas não tem letras minúsculas
         //"0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM");
 
     for (const cv::Mat& placaRecortadaProcessada : possiveisPlacas) {
@@ -40,9 +40,9 @@ tuple<string, cv::Mat> aplicarOCR(const vector<Mat>& possiveisPlacas) {
         ocr.SetSourceResolution(300);
         string outText = string(ocr.GetUTF8Text());
         //Debug
-        cout << "Texto: " << outText << endl;
-        //imshow("Placa Recortada Processada", placaRecortadaProcessada);
-        //waitKey(0); 
+        // cout << "Texto: " << outText << endl;
+        // imshow("Placa Recortada Processada", placaRecortadaProcessada);
+        // waitKey(0); 
         // Se encontra alguma placa válida (normal ou padrão mercosul), para a iteração entre as possíveis placas, e retorna a placa atual
         string placa = encontrarPlaca(outText);
         if (placa != "") {

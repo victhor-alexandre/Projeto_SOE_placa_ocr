@@ -3,6 +3,7 @@
 
 #include <opencv2/opencv.hpp>
 
+
 namespace processarImagem {
     cv::Mat processarImagem(const cv::Mat& imagemPlaca);
 }

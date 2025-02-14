@@ -26,7 +26,6 @@ vector<Mat> processarContornos(Mat& imagemOriginal, const Mat& imagemProcessada)
         thread_id.push_back(tid);
     }
 
-    // Join all threads to ensure they are completed
     for (pthread_t tid : thread_id) {
         Mat* placa = nullptr;
         pthread_join(tid, (void**)&placa);
@@ -37,7 +36,6 @@ vector<Mat> processarContornos(Mat& imagemOriginal, const Mat& imagemProcessada)
     }
     pthread_join(thread_main, NULL);
     pthread_mutex_destroy(&mutexLock);
-    //cout << "Placas encontradas: " << possiveisPlacas.size() << endl;
     
     return possiveisPlacas;
 }   
@@ -73,31 +71,26 @@ void* validarContorno(void* args) {
 
     // Se o polígono tiver quatro lados, consideramos que é um retângulo
     if (aprox.size() >= 4 && aprox.size() < 10) {
-        //drawContours(imagemOriginal, vector<vector<Point>>{aprox}, -1, Scalar(0, 255, 0), 2);
-    //cout << "antes do recorte" << endl;
         // recortar a imagem da placa
-        Mat imagemRecortada = imagemOriginal(boundingRect);
+        Mat imagemRecortadaProcessada = imagemOriginal(boundingRect);
         
         // Ampliar a imagem caso ela seja muito pequena
         if (area < 15000) {
-            cv::resize(imagemRecortada, imagemRecortada, cv::Size(imagemRecortada.cols * 1.75,imagemRecortada.rows * 1.75), 0, 0, 1);
+            cv::resize(imagemRecortadaProcessada, imagemRecortadaProcessada, cv::Size(imagemRecortadaProcessada.cols * 1.75,imagemRecortadaProcessada.rows * 1.75), 0, 0, 1);
 
         }
         // Debugging: Print cropped image information
         //cout << "Cropped image size: " << imagemRecortada.size() << endl;
 
         // converter a imagem da placa para tons de cinza
-        Mat imagemRecortadaCinza;
-        cvtColor(imagemRecortada, imagemRecortadaCinza, COLOR_BGR2GRAY);
+        cvtColor(imagemRecortadaProcessada, imagemRecortadaProcessada, COLOR_BGR2GRAY);
 
         // aplicar limiarização para tornar os caracteres mais destacados
-        Mat imagemRecortadaLimiarizada;
-        threshold(imagemRecortadaCinza, imagemRecortadaLimiarizada, 0, 255,  THRESH_OTSU);
+        threshold(imagemRecortadaProcessada, imagemRecortadaProcessada, 0, 255,  THRESH_OTSU);
 
         // aplicar operação de fechamento para preencher regiões de contornos
         Mat kernel = getStructuringElement(MORPH_RECT, Size(5, 5));
-        Mat imagemRecortadaProcessada;
-        morphologyEx(imagemRecortadaLimiarizada, imagemRecortadaProcessada, MORPH_CLOSE, kernel);
+        morphologyEx(imagemRecortadaProcessada, imagemRecortadaProcessada, MORPH_CLOSE, kernel);
 
         // aplicar operação de abertura para remover ruídos
         kernel = getStructuringElement(MORPH_RECT, Size(3, 3));
@@ -111,9 +104,6 @@ void* validarContorno(void* args) {
         erode(imagemRecortadaProcessada, imagemRecortadaProcessada, kernel, Point(-1, -1), 1);
 
         result = new Mat(imagemRecortadaProcessada);
-        //imshow("Placa Recortada Processada", imagemRecortadaProcessada);
-        //waitKey(0);
-
     }
     
     return result;
