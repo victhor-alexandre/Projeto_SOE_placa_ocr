@@ -24,11 +24,13 @@ Na primeira vez que instalar esse programa, é necessário abrir o terminal na r
 
 ```sh
 git clone https://github.com/victhor-alexandre/Projeto_SOE_placa_ocr
+
 ```
 
 Para compilar, abra o diretório onde o repositório foi baixado e execute os comandos:
 
 ```sh
+cd Projeto_SOE_placa_ocr
 make clean
 make
 ```
